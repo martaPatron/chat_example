@@ -25,13 +25,19 @@ body {
             .name {
                 text-decoration: underline;
             }
-            input {
+            .another-name {
                 padding: 0 5px;
             }
-            button {
+            .change-name {
                 padding: 5px;
                 border: none;
                 cursor: pointer;
+            }
+            .logout {
+                background: #dfdedd;
+                color: black;
+                text-decoration: none;
+                padding: 5px;
             }
         }
     }

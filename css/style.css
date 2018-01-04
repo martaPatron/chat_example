@@ -32,14 +32,21 @@ body .header .logout-form .name {
   text-decoration: underline;
 }
 
-body .header .logout-form input {
+body .header .logout-form .another-name {
   padding: 0 5px;
 }
 
-body .header .logout-form button {
+body .header .logout-form .change-name {
   padding: 5px;
   border: none;
   cursor: pointer;
+}
+
+body .header .logout-form .logout {
+  background: #dfdedd;
+  color: black;
+  text-decoration: none;
+  padding: 5px;
 }
 
 body .login-page {
