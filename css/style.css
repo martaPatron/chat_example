@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css?family=Cabin");
 * {
   padding: 0;
   margin: 0;
@@ -5,7 +6,10 @@
 }
 
 body {
+  font-family: Cabin;
   font-size: 14px;
+  background: #161615;
+  color: #a09e9e;
 }
 
 body .header {
@@ -29,6 +33,7 @@ body .header .logout-form {
 }
 
 body .header .logout-form .name {
+  color: #a09e9e;
   text-decoration: underline;
 }
 
@@ -54,38 +59,76 @@ body .login-page {
   flex-direction: column;
 }
 
-body .messages-container {
-  width: 100%;
-  height: 100%;
+body .login-page .login-part {
+  font-size: 14px;
 }
 
-body .messages-container #messages {
+body .login-page .login-part #nick-name {
+  background: #30302e;
+  color: #a09e9e;
+  outline: 1px solid #a09e9e;
+  padding: 10px;
+  border: none;
+}
+
+body .login-page .login-part #nick-name:active {
+  border: none;
+  padding: 10px;
+}
+
+body .login-page .login-part .login {
+  font-size: 18px;
+  padding: 5px;
+  color: #a09e9e;
+  text-decoration: none;
+}
+
+body .main-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+body .main-content .messages-container {
+  width: 70%;
+  height: 100%;
+  padding-left: 5px;
+}
+
+body .main-content .messages-container #messages {
   list-style-type: none;
 }
 
-body .messages-container #messages li {
-  padding: 5px 10px;
+body .main-content .messages-container #messages li {
+  font-size: 16px;
+  padding: 10px;
+  margin-bottom: 5px;
+  outline: 1px solid #a09e9e;
   display: flex;
   justify-content: space-between;
 }
 
-body .messages-container #messages li span {
+body .main-content .messages-container #messages li span {
   position: relative;
   right: 0;
 }
 
-body .messages-container form {
-  position: fixed;
+body .main-content .messages-container form {
+  position: absolute;
   bottom: 0;
-  width: 100%;
+  width: 70%;
+  padding-bottom: 5px;
+  display: flex;
+  justify-content: space-between;
 }
 
-body .messages-container form #message {
+body .main-content .messages-container form #message {
   padding: 10px;
-  width: 80%;
+  width: 90%;
 }
 
-body .messages-container form button {
+body .main-content .messages-container form button {
   border: none;
   padding: 10px 20px;
   cursor: pointer;
