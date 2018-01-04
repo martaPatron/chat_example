@@ -4,10 +4,15 @@
   box-sizing: border-box;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+  align-content: stretch;
+}
+
 .messages-container {
   width: 100%;
-  position: fixed;
-  bottom: 0;
+  height: 100%;
 }
 
 .messages-container #messages {
@@ -19,18 +24,23 @@
 }
 
 .messages-container #messages li:nth-child(odd) {
-  background: #515352;
+  background: #626362;
+}
+
+.messages-container form {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 
 .messages-container form #message {
   padding: 10px;
-  width: 90%;
+  width: 80%;
 }
 
 .messages-container form button {
-  width: 9%;
   border: none;
-  padding: 10px;
+  padding: 10px 20px;
   cursor: pointer;
 }
 /*# sourceMappingURL=style.css.map */
