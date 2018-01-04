@@ -1,6 +1,6 @@
 let app = require('express')();
 let http = require('http').Server(app);
-let io = require('socket')(http);
+let io = require('socket.io')(http);
 
 app.get('/', function(req, res) {
   res.sendFile(__dirname + '/index.html');
@@ -8,6 +8,9 @@ app.get('/', function(req, res) {
 
 io.on('connection', function(socket) {
     console.log('a user connected');
+    socket.on('disconnect', function() {
+        console.log('user disconnect');
+    });
   });
 
 http.listen(8000, function() {
