@@ -1,4 +1,6 @@
 $(function() {
+    $('.name').text(localStorage.getItem('currentUser'));
+
     let socket = io();
     $('form').submit(function() {
       socket.emit('chat message', $('#message').val());

@@ -1,11 +1,12 @@
-let nameUser;
+
 function loginchat() {
     let nick = document.getElementById('nick-name').value;
-    nameUser = localStorage.getItem(nick);
+    let nameUser = localStorage.getItem(nick);
     if (!nameUser) {
         localStorage.setItem(nick, nick);
         nameUser = nick;
     }
+    localStorage.setItem('currentUser', nick);
     nick = '';
     this.href = 'chatPage.html';
 }
