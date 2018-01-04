@@ -7,34 +7,46 @@ $font-message: #626362;
     box-sizing: border-box;
 }
 body {
-    display: flex;
-    flex-direction: column;
-    align-content: stretch;
-}
-.messages-container {
-    width: 100%;
-    height: 100%;
-    #messages {
-        list-style-type: none;
-        li {
-            padding: 5px 10px;
-            &:nth-child(odd) {
-                background: $font-message;
-            }
+    font-size: 14px;
+    // background: $font-color;
+    .header {
+        width: 100%;
+        height: 80px;
+        .heading {
+            padding: 10px;
         }
     }
-    form {
-        position: fixed;
-        bottom: 0;
+    .login-page {
+        display: flex;
+        flex-direction: column;
+    }
+    .messages-container {
         width: 100%;
-        #message {
-            padding: 10px;
-            width: 80%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        #messages {
+            list-style-type: none;
+            li {
+                padding: 5px 10px;
+                &:nth-child(odd) {
+                    background: $font-message;
+                }
+            }
         }
-        button {
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
+        form {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            #message {
+                padding: 10px;
+                width: 80%;
+            }
+            button {
+                border: none;
+                padding: 10px 20px;
+                cursor: pointer;
+            }
         }
     }
 }

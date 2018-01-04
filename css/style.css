@@ -5,40 +5,54 @@
 }
 
 body {
+  font-size: 14px;
+}
+
+body .header {
+  width: 100%;
+  height: 80px;
+}
+
+body .header .heading {
+  padding: 10px;
+}
+
+body .login-page {
   display: flex;
   flex-direction: column;
-  align-content: stretch;
 }
 
-.messages-container {
+body .messages-container {
   width: 100%;
   height: 100%;
+  display: flex;
+  justify-content: center;
 }
 
-.messages-container #messages {
+body .messages-container #messages {
   list-style-type: none;
 }
 
-.messages-container #messages li {
+body .messages-container #messages li {
   padding: 5px 10px;
 }
 
-.messages-container #messages li:nth-child(odd) {
+body .messages-container #messages li:nth-child(odd) {
   background: #626362;
 }
 
-.messages-container form {
+body .messages-container form {
   position: fixed;
   bottom: 0;
   width: 100%;
 }
 
-.messages-container form #message {
+body .messages-container form #message {
   padding: 10px;
   width: 80%;
 }
 
-.messages-container form button {
+body .messages-container form button {
   border: none;
   padding: 10px 20px;
   cursor: pointer;
