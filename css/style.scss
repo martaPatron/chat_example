@@ -1,0 +1,35 @@
+$font-color: #292826;
+$font-message: #515352;
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.messages-container {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    #messages {
+        list-style-type: none;
+        li {
+            padding: 5px 10px;
+            &:nth-child(odd) {
+                background: $font-message;
+            }
+        }
+    }
+    form {
+        #message {
+            padding: 10px;
+            width: 90%;
+        }
+        button {
+            width: 9%;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+    }
+}
