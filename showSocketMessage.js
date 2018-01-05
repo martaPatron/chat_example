@@ -3,7 +3,7 @@ $(function() {
     let currentName = localStorage.getItem('currentUser');
     $('.name').text(currentName);
     let socket = io();
-
+    socket.nameUser = currentName;
     $('form').submit(function() {
       socket.emit('chat message', $('#message').val());
       $('#message').val('');
@@ -11,7 +11,7 @@ $(function() {
     });
 
     socket.on('chat message', function(msg) {
-      let date = new Date();
+      let date = new Date;
       let message = `${currentName}: \n ${msg}`;
       let timeMessage = `${date.getHours()}:${date.getMinutes()}`;
         $('#messages').append($('<li>').text(message).append($('<span>').text(timeMessage)));
@@ -22,6 +22,7 @@ $(function() {
       localStorage.removeItem(currentName);
       this.href = 'index.html';
     });
+
     $('.change-name').on('click', function() {
       $('.another-name').val('');
       $('.new-name-box').toggle('slow');
@@ -41,7 +42,8 @@ $(function() {
       }
     });
 
-    socket.on('login user', function() { // from database
+    socket.on('login user', function() {
+      console.log(`userName: ${socket.nameUser}`);
       $('#online-users').append($('<li>').text(currentName));
     });
   });

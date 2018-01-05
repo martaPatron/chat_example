@@ -3,6 +3,7 @@
 $font-color: #161615;
 $header-color: #a09e9e;
 $text-color: #c5c1c1;
+$additional-color: #857171;
 
 * {
     padding: 0;
@@ -111,15 +112,24 @@ body {
             #messages {
                 width: 100%;
                 list-style-type: none;
+                position: relative;
                 li {
-                    display: flex;
-                    justify-content: space-between;
+                    // display: flex;
+                    // justify-content: space-between;
                     font-size: 16px;
-                    padding: 10px;
+                    padding: 10px 50px 10px 10px;
                     height: auto;
                     margin-bottom: 5px;
                     outline: 1px solid $text-color;
                     position: relative;
+                    word-break: break-all;
+                    span {
+                        color: $additional-color;
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        padding: 5px;
+                    }
                 }
             }
             form {
@@ -154,7 +164,7 @@ body {
                     padding: 15xp;
                     margin-bottom: 10px;
                     text-align: center;
-                    color: #857171;
+                    color: $additional-color;
                 }
                 li {
                     font-size: 16px;

@@ -14,7 +14,7 @@ io.on('connection', function(socket) {
       io.emit('chat message', msg);
     });
     socket.emit('login user');
-  });
+});
 
 http.listen(8000, function() {
   console.log('listening on *:8000');

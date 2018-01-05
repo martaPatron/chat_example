@@ -126,17 +126,25 @@ body .main-content .messages-container {
 body .main-content .messages-container #messages {
   width: 100%;
   list-style-type: none;
+  position: relative;
 }
 
 body .main-content .messages-container #messages li {
-  display: flex;
-  justify-content: space-between;
   font-size: 16px;
-  padding: 10px;
+  padding: 10px 50px 10px 10px;
   height: auto;
   margin-bottom: 5px;
   outline: 1px solid #c5c1c1;
   position: relative;
+  word-break: break-all;
+}
+
+body .main-content .messages-container #messages li span {
+  color: #857171;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 5px;
 }
 
 body .main-content .messages-container form {
