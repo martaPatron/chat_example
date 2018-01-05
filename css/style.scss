@@ -1,6 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Cabin');
+
 $font-color: #161615;
-$text-color: #a09e9e;
+$header-color: #a09e9e;
+$text-color: #c5c1c1;
+
 * {
     padding: 0;
     margin: 0;
@@ -19,31 +22,57 @@ body {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        align-content: stretch;
         .heading {
             padding: 10px;
+            color: $header-color;
         }
         .logout-form {
-            min-width: 400px;
+            min-width: 250px;
+            height: 100%;
             padding: 10px;
+            position: relative;
             display: flex;
             justify-content: space-between;
             .name {
-                color: $text-color;
                 text-decoration: underline;
-            }
-            .another-name {
-                padding: 0 5px;
-            }
-            .change-name {
-                padding: 5px;
-                border: none;
-                cursor: pointer;
+                margin-right: 10px;
             }
             .logout {
                 background: #dfdedd;
                 color: black;
                 text-decoration: none;
+                margin-right: 10px;
                 padding: 5px;
+            }
+            .change-name {
+                background: #dfdedd;
+                padding: 5px;
+                border: none;
+                cursor: pointer;
+                margin-right: 10px;
+            }
+        }
+        .new-name-box {
+            position: absolute;
+            right: 250px;
+            display: none;
+            .another-name {
+                background: lighten($font-color, 10%);
+                color: white;
+                padding: 7px;
+                margin-right: 10px;
+                border: none;
+                outline: 1px solid $text-color;
+            }
+            .new-name {
+                background: #dfdedd;
+                color: black;
+                border: none;
+                text-decoration: none;
+                margin-right: 10px;
+                padding: 7px 10px;
+                cursor: pointer;
             }
         }
     }
@@ -74,25 +103,23 @@ body {
     .main-content {
         width: 100%;
         height: 100%;
-        display: flex;
-        flex-direction: column;
         .messages-container {
+            float: left;
             width: 70%;
             height: 100%;
             padding-left: 5px;
             #messages {
+                width: 100%;
                 list-style-type: none;
                 li {
-                    font-size: 16px;
-                    padding: 10px;
-                    margin-bottom: 5px;
-                    outline: 1px solid $text-color;
                     display: flex;
                     justify-content: space-between;
-                    span {
-                        position: relative;
-                        right: 0;
-                    }
+                    font-size: 16px;
+                    padding: 10px;
+                    height: auto;
+                    margin-bottom: 5px;
+                    outline: 1px solid $text-color;
+                    position: relative;
                 }
             }
             form {
@@ -103,6 +130,10 @@ body {
                 display: flex;
                 justify-content: space-between;
                 #message {
+                    background: lighten($font-color, 10%);
+                    color: $text-color;
+                    outline: 1px solid $text-color;
+                    border: none;
                     padding: 10px;
                     width: 90%;
                 }
@@ -110,6 +141,25 @@ body {
                     border: none;
                     padding: 10px 20px;
                     cursor: pointer;
+                }
+            }
+        }
+        .users-online {
+            float: right;
+            width: 28%;
+            padding-right: 10px;
+            #online-users {
+                list-style-type: none;
+                p {
+                    padding: 15xp;
+                    margin-bottom: 10px;
+                    text-align: center;
+                    color: #857171;
+                }
+                li {
+                    font-size: 16px;
+                    padding: 10px;
+                    outline: 1px solid $text-color;
                 }
             }
         }

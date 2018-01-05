@@ -16,9 +16,12 @@
         <h1 class="heading">Example chat</h1>
         <div class="logout-form">
             <h3 class="name"></h3>
-            <input type="text" class="another-name">
             <button class="change-name">Change name</button>
             <a href="#" class="logout">Logout</a>
+        </div>
+        <div class="new-name-box">
+            <input type="text" class="another-name" placeholder="Enter new name">
+            <button class="new-name">Ok</button>
         </div>
     </header>
     <main class="main-content">
@@ -29,10 +32,14 @@
                 <button>Send</button>
             </form>
         </section>
-        <section class="users-online"></section>
+        <section class="users-online">
+            <ul id="online-users">
+                <p>Online:</p>
+            </ul>
+        </section>
     </main>
     <script src="/socket.io/socket.io.js"></script>
-    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </body>
 
 </html>

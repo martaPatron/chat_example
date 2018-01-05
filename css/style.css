@@ -9,7 +9,7 @@ body {
   font-family: Cabin;
   font-size: 14px;
   background: #161615;
-  color: #a09e9e;
+  color: #c5c1c1;
 }
 
 body .header {
@@ -19,39 +19,67 @@ body .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  align-content: stretch;
 }
 
 body .header .heading {
   padding: 10px;
+  color: #a09e9e;
 }
 
 body .header .logout-form {
-  min-width: 400px;
+  min-width: 250px;
+  height: 100%;
   padding: 10px;
+  position: relative;
   display: flex;
   justify-content: space-between;
 }
 
 body .header .logout-form .name {
-  color: #a09e9e;
   text-decoration: underline;
-}
-
-body .header .logout-form .another-name {
-  padding: 0 5px;
-}
-
-body .header .logout-form .change-name {
-  padding: 5px;
-  border: none;
-  cursor: pointer;
+  margin-right: 10px;
 }
 
 body .header .logout-form .logout {
   background: #dfdedd;
   color: black;
   text-decoration: none;
+  margin-right: 10px;
   padding: 5px;
+}
+
+body .header .logout-form .change-name {
+  background: #dfdedd;
+  padding: 5px;
+  border: none;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+body .header .new-name-box {
+  position: absolute;
+  right: 250px;
+  display: none;
+}
+
+body .header .new-name-box .another-name {
+  background: #30302e;
+  color: white;
+  padding: 7px;
+  margin-right: 10px;
+  border: none;
+  outline: 1px solid #c5c1c1;
+}
+
+body .header .new-name-box .new-name {
+  background: #dfdedd;
+  color: black;
+  border: none;
+  text-decoration: none;
+  margin-right: 10px;
+  padding: 7px 10px;
+  cursor: pointer;
 }
 
 body .login-page {
@@ -65,8 +93,8 @@ body .login-page .login-part {
 
 body .login-page .login-part #nick-name {
   background: #30302e;
-  color: #a09e9e;
-  outline: 1px solid #a09e9e;
+  color: #c5c1c1;
+  outline: 1px solid #c5c1c1;
   padding: 10px;
   border: none;
 }
@@ -79,39 +107,36 @@ body .login-page .login-part #nick-name:active {
 body .login-page .login-part .login {
   font-size: 18px;
   padding: 5px;
-  color: #a09e9e;
+  color: #c5c1c1;
   text-decoration: none;
 }
 
 body .main-content {
   width: 100%;
   height: 100%;
-  display: flex;
-  flex-direction: column;
 }
 
 body .main-content .messages-container {
+  float: left;
   width: 70%;
   height: 100%;
   padding-left: 5px;
 }
 
 body .main-content .messages-container #messages {
+  width: 100%;
   list-style-type: none;
 }
 
 body .main-content .messages-container #messages li {
-  font-size: 16px;
-  padding: 10px;
-  margin-bottom: 5px;
-  outline: 1px solid #a09e9e;
   display: flex;
   justify-content: space-between;
-}
-
-body .main-content .messages-container #messages li span {
+  font-size: 16px;
+  padding: 10px;
+  height: auto;
+  margin-bottom: 5px;
+  outline: 1px solid #c5c1c1;
   position: relative;
-  right: 0;
 }
 
 body .main-content .messages-container form {
@@ -124,6 +149,10 @@ body .main-content .messages-container form {
 }
 
 body .main-content .messages-container form #message {
+  background: #30302e;
+  color: #c5c1c1;
+  outline: 1px solid #c5c1c1;
+  border: none;
   padding: 10px;
   width: 90%;
 }
@@ -132,5 +161,28 @@ body .main-content .messages-container form button {
   border: none;
   padding: 10px 20px;
   cursor: pointer;
+}
+
+body .main-content .users-online {
+  float: right;
+  width: 28%;
+  padding-right: 10px;
+}
+
+body .main-content .users-online #online-users {
+  list-style-type: none;
+}
+
+body .main-content .users-online #online-users p {
+  padding: 15xp;
+  margin-bottom: 10px;
+  text-align: center;
+  color: #857171;
+}
+
+body .main-content .users-online #online-users li {
+  font-size: 16px;
+  padding: 10px;
+  outline: 1px solid #c5c1c1;
 }
 /*# sourceMappingURL=style.css.map */
