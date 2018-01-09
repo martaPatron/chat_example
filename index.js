@@ -3,6 +3,8 @@ let app = express();
 let http = require('http').Server(app);
 let io = require('socket.io')(http);
 let port = 8000;
+let redis = require('redis');
+let client = redis.createClient();
 
 app.use(express.static(__dirname));
 app.get('/', function(req, res) {
@@ -11,6 +13,7 @@ app.get('/', function(req, res) {
 
 io.on('connection', function(socket) {
     socket.on('chat message', function(msg) {
+        console.log(msg);
         io.emit('chat message', msg);
     });
 
@@ -21,6 +24,16 @@ io.on('connection', function(socket) {
     });
 
     socket.broadcast.emit('disconnect');
+});
+
+
+client.on('error', function(err) {
+    console.log('Something went wrong ', err)
+});
+client.set('my test key', 'my test value', redis.print);
+client.get('my test key', function(error, result) {
+    if (error) throw error;
+    console.log('GET result ->', result)
 });
 
 http.listen(port, function() {
