@@ -56,6 +56,7 @@ $(function() {
     });
 
     function addNewUser(user) {
-      $('#online-users').append($('<li>').text(user));
+      let msg = `${user} login`;
+      $('#online-users').append($('<li>').text(msg));
     }
   });
