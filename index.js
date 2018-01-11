@@ -19,12 +19,18 @@ client.on('error', err => {
 });
 
 io.on('connection', socket => {
-    socket.on('chat message', async(username, msg) => {
+    socket.on('chat message', async(user, msg) => {
         let date = new Date;
-        let time = `${date.getHours()}:${date.getMinutes()}`;
-        let mess = `${username}: ${msg} ${time}`;
-        await client.saddAsync('messages', mess);
-        io.emit('chat message', mess, time);
+        let hour = `${date.getHours()}:${date.getMinutes()}`;
+        let mess = {
+            username: user,
+            message: msg,
+            time: hour,
+            times: Date.now()
+        };
+        console.log(JSON.stringify(mess));
+        await client.saddAsync('messages', JSON.stringify(mess));
+        io.emit('chat message', JSON.stringify(mess));
     });
 
     socket.on('connection', async username => {
@@ -33,23 +39,28 @@ io.on('connection', socket => {
         const messages = await client.smembersAsync('messages');
         const keys = await client.hkeysAsync('onlineUsers');
         socket.emit('load page', keys, messages);
+        let isUser = keys.indexOf(username);
+        console.log('username');
+        console.log(username);
+        socket.broadcast.emit('add new user', {
+            user: username
+        });
     });
-
     socket.on('logout', async username => {
-        console.log('in logout');
+        // console.log('in logout');
         if (await client.hexistsAsync('onlineUsers', username)) {
             await client.hdelAsync('onlineUsers', username);
         }
-      });
+    });
 
-      socket.on('change name', async(oldName, newName) => {
-          if (await client.hexistsAsync('onlineUsers', oldName)) {
+    socket.on('change name', async(oldName, newName) => {
+        if (await client.hexistsAsync('onlineUsers', oldName)) {
             await client.hdelAsync('onlineUsers', oldName);
             await client.hsetAsync('onlineUsers', newName, true);
-          }
-      });
+        }
+    });
     socket.emit('disconnect');
-    
+
 });
 
 http.listen(port, function() {

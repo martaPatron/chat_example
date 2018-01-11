@@ -10,22 +10,24 @@ $(function() {
         return false;
     });
 
-    socket.on('chat message', function(msg, date) {
-        addNewMessage(msg);
+    socket.on('chat message', msg => {
+        let data = JSON.parse(msg);
+        addNewMessage(data);
     });
 
     socket.emit('connection', currentName);
 
     socket.on('load page', (users, messages) => {
-      for (let i = 0; i < users.length; i++) {
-        addNewUser(users[i]);
-      }
-      console.log(messages);
-      for (let i = 0; i < messages.length; i++) {
-        addNewMessage(messages[i]);
-      }
-      console.log('mess:');
-      sortMessages(messages);
+        for (let i = 0; i < users.length; i++) {
+            addNewUser(users[i]);
+        }
+        let newMessages = sortMessages(messages);
+        for (let i = 0; i < newMessages.length; i++) {
+            addNewMessage(newMessages[i]);
+        }
+    });
+    socket.on('add new user', data => {
+        addNewUser(data.user);
     });
 
     
@@ -62,26 +64,19 @@ $(function() {
     });
 
     function addNewUser(user) {
-      $('#online-users').append($('<li>').text(user));
+        $('#online-users').append($('<li>').text(user));
     }
 
     function addNewMessage(msg) {
-      let beginTime = msg.lastIndexOf(' ');
-      let date = msg.substring(beginTime, msg.length);
-      let mess = msg.substring(0, beginTime + 1);
-      $('#messages').append($('<li>').text(mess).append($('<span>').text(date)));
+        let mess = `${msg.username}: ${msg.message}`;
+        $('#messages').append($('<li>').text(mess).append($('<span>').text(msg.time)));
     }
 
     function sortMessages(messages) {
-      let messagesObjects = messages.map( item => {
-        let beginTime = item.lastIndexOf(' ');
-        let date = item.substring(beginTime, item.length);
-        let mess = item.substring(0, beginTime + 1);
-        return {
-          message: mess,
-          time: date
-        };
-      });
-      console.log(messagesObjects);
+        let listMessages = messages.map(item => JSON.parse(item));
+        listMessages.sort(function(a, b) {
+            return a.times - b.times;
+        });
+        return listMessages;
     }
 });
