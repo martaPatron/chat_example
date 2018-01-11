@@ -15,6 +15,7 @@ body {
 body .header {
   width: 100%;
   min-height: 80px;
+  padding: 10px;
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -27,7 +28,43 @@ body .header .heading {
   color: #a09e9e;
 }
 
-body .header .logout-form {
+body .header .login-part {
+  font-size: 14px;
+  display: flex;
+}
+
+body .header .login-part .warning {
+  font-size: 14px;
+  color: #a09e9e;
+  padding: 10px;
+  display: none;
+}
+
+body .header .login-part #nick-name {
+  background: #30302e;
+  color: #c5c1c1;
+  outline: 1px solid #c5c1c1;
+  padding: 10px;
+  border: none;
+}
+
+body .header .login-part #nick-name:active {
+  border: none;
+  padding: 10px;
+}
+
+body .header .login-part .login {
+  font-size: 18px;
+  padding: 5px;
+  color: #c5c1c1;
+  text-decoration: none;
+}
+
+body .header .chat-page {
+  display: none;
+}
+
+body .header .chat-page .logout-form {
   min-width: 250px;
   height: 100%;
   padding: 10px;
@@ -36,12 +73,12 @@ body .header .logout-form {
   justify-content: space-between;
 }
 
-body .header .logout-form .name {
+body .header .chat-page .logout-form .name {
   text-decoration: underline;
   margin-right: 10px;
 }
 
-body .header .logout-form .logout {
+body .header .chat-page .logout-form .logout {
   background: #dfdedd;
   color: black;
   text-decoration: none;
@@ -49,7 +86,7 @@ body .header .logout-form .logout {
   padding: 5px;
 }
 
-body .header .logout-form .change-name {
+body .header .chat-page .logout-form .change-name {
   background: #dfdedd;
   padding: 5px;
   border: none;
@@ -57,13 +94,21 @@ body .header .logout-form .change-name {
   margin-right: 10px;
 }
 
-body .header .new-name-box {
+body .header .chat-page .new-name-box {
   position: absolute;
   right: 250px;
+  top: 25px;
   display: none;
 }
 
-body .header .new-name-box .another-name {
+body .header .chat-page .new-name-box .warning {
+  font-size: 14px;
+  color: #a09e9e;
+  padding: 10px;
+  display: none;
+}
+
+body .header .chat-page .new-name-box .another-name {
   background: #30302e;
   color: white;
   padding: 7px;
@@ -72,7 +117,7 @@ body .header .new-name-box .another-name {
   outline: 1px solid #c5c1c1;
 }
 
-body .header .new-name-box .new-name {
+body .header .chat-page .new-name-box .new-name {
   background: #dfdedd;
   color: black;
   border: none;
@@ -82,38 +127,10 @@ body .header .new-name-box .new-name {
   cursor: pointer;
 }
 
-body .login-page {
-  display: flex;
-  flex-direction: column;
-}
-
-body .login-page .login-part {
-  font-size: 14px;
-}
-
-body .login-page .login-part #nick-name {
-  background: #30302e;
-  color: #c5c1c1;
-  outline: 1px solid #c5c1c1;
-  padding: 10px;
-  border: none;
-}
-
-body .login-page .login-part #nick-name:active {
-  border: none;
-  padding: 10px;
-}
-
-body .login-page .login-part .login {
-  font-size: 18px;
-  padding: 5px;
-  color: #c5c1c1;
-  text-decoration: none;
-}
-
 body .main-content {
   width: 100%;
   height: 100%;
+  display: none;
 }
 
 body .main-content .messages-container {

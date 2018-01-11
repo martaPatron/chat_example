@@ -19,6 +19,7 @@ body {
     .header {
         width: 100%;
         min-height: 80px;
+        padding: 10px;
         position: relative;
         display: flex;
         justify-content: space-between;
@@ -28,60 +29,16 @@ body {
             padding: 10px;
             color: $header-color;
         }
-        .logout-form {
-            min-width: 250px;
-            height: 100%;
-            padding: 10px;
-            position: relative;
-            display: flex;
-            justify-content: space-between;
-            .name {
-                text-decoration: underline;
-                margin-right: 10px;
-            }
-            .logout {
-                background: #dfdedd;
-                color: black;
-                text-decoration: none;
-                margin-right: 10px;
-                padding: 5px;
-            }
-            .change-name {
-                background: #dfdedd;
-                padding: 5px;
-                border: none;
-                cursor: pointer;
-                margin-right: 10px;
-            }
-        }
-        .new-name-box {
-            position: absolute;
-            right: 250px;
-            display: none;
-            .another-name {
-                background: lighten($font-color, 10%);
-                color: white;
-                padding: 7px;
-                margin-right: 10px;
-                border: none;
-                outline: 1px solid $text-color;
-            }
-            .new-name {
-                background: #dfdedd;
-                color: black;
-                border: none;
-                text-decoration: none;
-                margin-right: 10px;
-                padding: 7px 10px;
-                cursor: pointer;
-            }
-        }
-    }
-    .login-page {
-        display: flex;
-        flex-direction: column;
         .login-part {
+            // display: none;
             font-size: 14px;
+            display: flex;
+            .warning {
+                font-size: 14px;
+                color: $header-color;
+                padding: 10px;
+                display: none;
+            }
             #nick-name {
                 background: lighten($font-color, 10%);
                 color: $text-color;
@@ -100,10 +57,69 @@ body {
                 text-decoration: none;
             }
         }
+        .chat-page {
+            display: none;
+            .logout-form {
+                min-width: 250px;
+                height: 100%;
+                padding: 10px;
+                position: relative;
+                display: flex;
+                justify-content: space-between;
+                .name {
+                    text-decoration: underline;
+                    margin-right: 10px;
+                }
+                .logout {
+                    background: #dfdedd;
+                    color: black;
+                    text-decoration: none;
+                    margin-right: 10px;
+                    padding: 5px;
+                }
+                .change-name {
+                    background: #dfdedd;
+                    padding: 5px;
+                    border: none;
+                    cursor: pointer;
+                    margin-right: 10px;
+                }
+            }
+            .new-name-box {
+                position: absolute;
+                right: 250px;
+                top: 25px;
+                display: none;
+                .warning {
+                    font-size: 14px;
+                    color: $header-color;
+                    padding: 10px;
+                    display: none;
+                }
+                .another-name {
+                    background: lighten($font-color, 10%);
+                    color: white;
+                    padding: 7px;
+                    margin-right: 10px;
+                    border: none;
+                    outline: 1px solid $text-color;
+                }
+                .new-name {
+                    background: #dfdedd;
+                    color: black;
+                    border: none;
+                    text-decoration: none;
+                    margin-right: 10px;
+                    padding: 7px 10px;
+                    cursor: pointer;
+                }
+            }
+        }
     }
     .main-content {
         width: 100%;
         height: 100%;
+        display: none;
         .messages-container {
             float: left;
             width: 70%;

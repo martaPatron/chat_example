@@ -18,7 +18,9 @@ client.on('error', err => {
     console.log('Something went wrong ', err);
 });
 
+
 io.on('connection', socket => {
+    let nameOfUser = '';
     socket.on('chat message', async(user, msg) => {
         let date = new Date;
         let hour = `${date.getHours()}:${date.getMinutes()}`;
@@ -28,39 +30,65 @@ io.on('connection', socket => {
             time: hour,
             times: Date.now()
         };
-        console.log(JSON.stringify(mess));
         await client.saddAsync('messages', JSON.stringify(mess));
         io.emit('chat message', JSON.stringify(mess));
     });
 
-    socket.on('connection', async username => {
-        console.log('user connected');
-        await client.hsetAsync('onlineUsers', username, 'true');
-        const messages = await client.smembersAsync('messages');
-        const keys = await client.hkeysAsync('onlineUsers');
-        socket.emit('load page', keys, messages);
+    socket.on('login user', async(username, status) => {
+        let keys = await client.hkeysAsync('listOfUsers');
         let isUser = keys.indexOf(username);
-        console.log('username');
-        console.log(username);
-        socket.broadcast.emit('add new user', {
-            user: username
-        });
+        nameOfUser = username;
+        if (status) {
+            await client.hsetAsync('onlineUsers', username, 'true');
+            let keys = await client.hkeysAsync('onlineUsers');
+            const messages = await client.smembersAsync('messages');
+            socket.emit('login chat', keys, messages);
+            socket.broadcast.emit('add new user', {
+                user: username
+            });
+        } else if (isUser >= 0) {
+            socket.emit('user exist');
+        } else {
+            await client.hsetAsync('onlineUsers', username, 'true');
+            await client.hsetAsync('listOfUsers', username, 'true');
+            let keys = await client.hkeysAsync('onlineUsers');
+            const messages = await client.smembersAsync('messages');
+            socket.emit('login chat', keys, messages);
+            socket.broadcast.emit('add new user', {
+                user: username
+            });
+        }
     });
+
     socket.on('logout', async username => {
-        // console.log('in logout');
         if (await client.hexistsAsync('onlineUsers', username)) {
             await client.hdelAsync('onlineUsers', username);
+            await client.hdelAsync('listOfUsers', username);
         }
     });
 
     socket.on('change name', async(oldName, newName) => {
         if (await client.hexistsAsync('onlineUsers', oldName)) {
-            await client.hdelAsync('onlineUsers', oldName);
-            await client.hsetAsync('onlineUsers', newName, true);
+            let names = await client.hkeysAsync('listOfUsers');
+            if (names.indexOf(newName) <= 0) {
+                await Promise.all([
+                    client.hdelAsync('onlineUsers', oldName),
+                    client.hdelAsync('listOfUsers', oldName),
+                    client.hsetAsync('onlineUsers', newName, 'true'),
+                    client.hsetAsync('listOfUsers', newName, 'true')
+                ]);
+                socket.emit('change name in list', oldName, newName);
+            } else {
+                socket.emit('username exist');
+            }
         }
     });
-    socket.emit('disconnect');
 
+    socket.on('disconnect', async function() {
+        if (await client.hexistsAsync('onlineUsers', nameOfUser)) {
+            await client.hdelAsync('onlineUsers', nameOfUser);
+        }
+    });
 });
 
 http.listen(port, function() {
