@@ -28,6 +28,7 @@ $(function() {
       sortMessages(messages);
     });
 
+    
     $('.logout').on('click', function() {
         localStorage.removeItem('currentUser');
         localStorage.removeItem(currentName);
