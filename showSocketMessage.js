@@ -1,39 +1,46 @@
 $(function() {
-    console.log(localStorage);
     const socket = io();
     let currentName;
-    const nickInput = $('#nick-name');
     const warning = $('.warning');
+    const nickInput = $('#nick-name');
     const usersSelector = $('#online-users');
+    const inputMessage = $('.chat-message');
+    const loginSection = $('.login-part');
+    const chatPage = $('.chat-page');
+    const content = $('.main-content');
+    const messageInput = $('#message');
 
     nickInput.on('focus', function() {
-      warning.hide();
+        warning.hide();
     });
+    inputMessage.hide();
 
-    $('.login').on('click', function() {
-      let nick = nickInput.val();
-      let user = localStorage.getItem('currentUser');
-      if (!user) {
-          if (nick) {
-              currentName = nick;
-              socket.emit('login user', currentName, false);
-              nickInput.val('');
-          } else {
-              return;
-          }
-      } else {
-        currentName = user;
-        socket.emit('login user', currentName, true);
-      }
+    loginSection.on('submit', function() {
+        let nick = nickInput.val();
+        let user = localStorage.getItem('currentUser');
+        if (!user) {
+            if (nick) {
+                currentName = nick;
+                socket.emit('login user', currentName, false);
+                nickInput.val('');
+            } else {
+                return;
+            }
+        } else {
+          currentName = user;
+          socket.emit('login user', currentName, true);
+        }
+        nickInput.val('');
+        return false;
     });
 
     socket.on('user exist', function() {
       $('.warning').show();
     });
 
-    $('form').submit(function() {
-        socket.emit('chat message', currentName, $('#message').val());
-        $('#message').val('');
+    inputMessage.submit(function() {
+        socket.emit('chat message', currentName, messageInput.val());
+        messageInput.val('');
         return false;
     });
 
@@ -43,9 +50,11 @@ $(function() {
     });
 
     socket.on('login chat', (users, messages) => {
-        $('.login-part').hide();
-        $('.chat-page').show();
-        $('.main-content').show();
+        clearPage();
+        loginSection.hide();
+        chatPage.show();
+        content.show();
+        inputMessage.show();
         $('.name').text(currentName);
         localStorage.setItem('currentUser', currentName);
         for (let i = 0; i < users.length; i++) {
@@ -56,23 +65,14 @@ $(function() {
             addNewMessage(newMessages[i]);
         }
     });
+
     socket.on('add new user', data => {
-        console.log(localStorage);
         addNewUser(data.user);
     });
 
     socket.on('change name in list', function(oldName, newName) {
-      localStorage.setItem('currentUser', newName);
       currentName = newName;
-      $('.name').text(newName);
-      $('.another-name').val('');
-      $('.new-name-box').toggle('slow');
       let listUsers = usersSelector.children();
-      listUsers.map(item => {
-        if (item.textContent === oldName) {
-          item.textContent = newName;
-        }
-      });
       for (let i = 1; i < listUsers.length; i++) {
         if (listUsers[i].textContent === oldName) {
           listUsers[i].textContent = newName;
@@ -80,17 +80,36 @@ $(function() {
       }
     });
 
+    socket.on('change nickName', function(name) {
+        $('.name').text(name);
+        localStorage.setItem('currentUser', name);
+    });
+
     socket.on('username exist', function() {
-      console.log('username exist changed name none');
+      alert('This username already exist');
+    });
+
+    socket.on('user logout', function(user) {
+        let listUsers = usersSelector.children();
+        let index = 0;
+        for (let i = 1; i < listUsers.length; i++) {
+          if (listUsers[i].textContent === user.username) {
+            index = i;
+          }
+        }
+        if (index > 0) {
+            $(`#online-users li:nth-child(${index + 1})`).remove();
+        }
     });
 
     $('.logout').on('click', function() {
         localStorage.removeItem('currentUser');
         localStorage.removeItem(currentName);
         socket.emit('logout', currentName);
-        $('.login-part').show();
-        $('.chat-page').hide();
-        $('.main-content').hide();
+        loginSection.show();
+        chatPage.hide();
+        content.hide();
+        inputMessage.hide();
         clearPage();
     });
 
@@ -101,12 +120,13 @@ $(function() {
 
     $('.new-name').on('click', function() {
         let newName = $('.another-name').val();
+        $('.another-name').val('');
+        $('.new-name-box').toggle('slow');
         let name = localStorage.getItem(newName);
         if (newName && !name) {
             let oldName = localStorage.getItem('currentUser');
             socket.emit('change name', oldName, newName);
         }
-        // $('.new-name-box').toggle('slow');
     });
 
     function addNewUser(user) {
@@ -127,10 +147,6 @@ $(function() {
     }
 
     function clearPage() {
-      console.log('in clear page');
-      // $('ul').remove('li');
       $('li').remove();
-      // $('#messages').remove('li');
-      // $('#online-users').remove('li');
     }
 });

@@ -13,11 +13,11 @@
 <body>
     <header class="header">
         <h1 class="heading">Example chat</h1>
-        <section class="login-part">
+        <form class="login-part">
             <p class="warning">This name already exist</p>
             <input type="text" id="nick-name" autocomplete="off" placeholder="name">
-            <a href="#" class="login">Login</a>
-        </section>
+            <button class="login">Login</button>
+        </form>
         <section class="chat-page">
             <div class="logout-form">
                 <h3 class="name"></h3>
@@ -25,7 +25,6 @@
                 <a href="#" class="logout">Logout</a>
             </div>
             <div class="new-name-box">
-                <!-- <p class="warning">This name already exist</p> -->
                 <input type="text" class="another-name" placeholder="Enter new name">
                 <button class="new-name">Ok</button>
             </div>
@@ -34,10 +33,6 @@
     <main class="main-content">
         <section class="messages-container">
             <ul id="messages"></ul>
-            <form action="">
-                <input id="message" autocomplete="off" />
-                <button>Send</button>
-            </form>
         </section>
         <section class="users-online">
             <ul id="online-users">
@@ -45,6 +40,10 @@
             </ul>
         </section>
     </main>
+    <form action="" class="chat-message">
+        <input id="message" autocomplete="off" />
+        <button>Send</button>
+    </form>
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

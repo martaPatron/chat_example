@@ -30,7 +30,6 @@ body {
             color: $header-color;
         }
         .login-part {
-            // display: none;
             font-size: 14px;
             display: flex;
             .warning {
@@ -51,9 +50,9 @@ body {
                 }
             }
             .login {
-                font-size: 18px;
-                padding: 5px;
-                color: $text-color;
+                font-family: Cabin;
+                padding: 2px 10px;
+                margin-left: 10px;
                 text-decoration: none;
             }
         }
@@ -90,12 +89,6 @@ body {
                 right: 250px;
                 top: 25px;
                 display: none;
-                .warning {
-                    font-size: 14px;
-                    color: $header-color;
-                    padding: 10px;
-                    display: none;
-                }
                 .another-name {
                     background: lighten($font-color, 10%);
                     color: white;
@@ -122,57 +115,35 @@ body {
         display: none;
         .messages-container {
             float: left;
-            width: 70%;
+            width: 78%;
             height: 100%;
             padding-left: 5px;
+            margin-bottom: 100px;
             #messages {
                 width: 100%;
                 list-style-type: none;
                 position: relative;
                 li {
-                    // display: flex;
-                    // justify-content: space-between;
                     font-size: 16px;
-                    padding: 10px 50px 10px 10px;
+                    padding: 10px 55px 10px 10px;
                     height: auto;
                     margin-bottom: 5px;
-                    outline: 1px solid $text-color;
+                    border-bottom: 1px solid $text-color;
                     position: relative;
                     word-break: break-all;
                     span {
                         color: $additional-color;
                         position: absolute;
                         top: 0;
-                        right: 0;
+                        right: 5px;
                         padding: 5px;
                     }
-                }
-            }
-            form {
-                position: absolute;
-                bottom: 0;
-                width: 70%;
-                padding-bottom: 5px;
-                display: flex;
-                justify-content: space-between;
-                #message {
-                    background: lighten($font-color, 10%);
-                    color: $text-color;
-                    outline: 1px solid $text-color;
-                    border: none;
-                    padding: 10px;
-                    width: 90%;
-                }
-                button {
-                    border: none;
-                    padding: 10px 20px;
-                    cursor: pointer;
                 }
             }
         }
         .users-online {
             float: right;
-            width: 28%;
+            width: 18%;
             padding-right: 10px;
             #online-users {
                 list-style-type: none;
@@ -188,6 +159,29 @@ body {
                     outline: 1px solid $text-color;
                 }
             }
+        }
+    }
+    .chat-message {
+        position: fixed;
+        bottom: 0;
+        width: 80%;
+        // display: none;
+        display: flex;
+        justify-content: space-between;
+        #message {
+            background: lighten($font-color, 10%);
+            color: $text-color;
+            outline: 1px solid $text-color;
+            border: none;
+            padding: 10px;
+            margin-right: 10px;
+            width: 90%;
+            max-width: 90%;
+        }
+        button {
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
         }
     }
 }
