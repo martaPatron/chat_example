@@ -12,8 +12,12 @@ bluebird.promisifyAll(redis.Multi.prototype);
 let client;
 if (process.argv.length > 2) {
     client = redis.createClient(redisPort, 'redis-13166.c8.us-east-1-4.ec2.cloud.redislabs.com');
+    console.log('connect remote');
+    console.log(process.argv.length);
 } else {
     client = redis.createClient();
+    console.log('connect local');
+    console.log(process.argv.length);
 }
 
 client.auth(function(err) {
