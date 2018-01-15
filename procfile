@@ -1,1 +1,1 @@
-web: REDISTOGO_URL=remote node app.js
+web: node app.js status=remote
