@@ -1,10 +1,20 @@
 const express = require('express');
 const app = express();
-let http = require('http').Server(app);
-let io = require('socket.io')(http);
-let port = 8000;
-let redis = require('redis');
-let client = redis.createClient();
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
+const port = 8000;
+const redis = require('redis');
+
+let client;
+if (process.env.REDISTOGO_URL) {
+    let rtg = require('url').parse(process.env.REDISTOGO_URL);
+    client = redis.createClient(rtg.port, rtg.hostname);
+    client.auth(rtg.auth.split(':')[1]);
+} else {
+    client = redis.createClient();
+}
+
+// let client = redis.createClient();
 const bluebird = require('bluebird');
 bluebird.promisifyAll(redis.RedisClient.prototype);
 bluebird.promisifyAll(redis.Multi.prototype);
@@ -17,7 +27,6 @@ app.get('/', function(req, res) {
 client.on('error', err => {
     console.log('Something went wrong ', err);
 });
-
 
 io.on('connection', socket => {
     let nameOfUser = '';
