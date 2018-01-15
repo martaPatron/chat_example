@@ -1,2 +1,1 @@
-web: node index.js
-worker: process.env.REDISTOGO_URL=true
+web: MYAPIKEY=ndsvn2g8dnsb9hsg node app.js
