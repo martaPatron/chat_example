@@ -10,12 +10,10 @@ bluebird.promisifyAll(redis.RedisClient.prototype);
 bluebird.promisifyAll(redis.Multi.prototype);
 
 let client;
-if (MYAPIKEY) {
+if (process.env.REDISTOGO_URL) {
     client = redis.createClient(redisPort, 'redis-13166.c8.us-east-1-4.ec2.cloud.redislabs.com');
-    console.log('11111');
 } else {
     client = redis.createClient();
-    console.log('2222');
 }
 client.auth(function(err) {
     if (err) {

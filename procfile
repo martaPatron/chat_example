@@ -1,1 +1,1 @@
-web: MYAPIKEY=ndsvn2g8dnsb9hsg node app.js
+web: REDISTOGO_URL=remote node app.js
