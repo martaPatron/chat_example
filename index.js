@@ -9,19 +9,19 @@ const bluebird = require('bluebird');
 bluebird.promisifyAll(redis.RedisClient.prototype);
 bluebird.promisifyAll(redis.Multi.prototype);
 
-// const client = redis.createClient(redisPort, 'redis-13166.c8.us-east-1-4.ec2.cloud.redislabs.com');
-// client.auth(function(err) {
-//     if (err) {
-//         console.log(`Error from redis: ${err}`);
-//         throw err;
-//     }
-// });
-let client;
-if (process.env.REDISTOGO_URL) {
-    client = redis.createClient(redisPort, 'redis-13166.c8.us-east-1-4.ec2.cloud.redislabs.com');
-} else {
-    client = redis.createClient();
-}
+const client = redis.createClient(redisPort, 'redis-13166.c8.us-east-1-4.ec2.cloud.redislabs.com');
+client.auth(function(err) {
+    if (err) {
+        console.log(`Error from redis: ${err}`);
+        throw err;
+    }
+});
+// let client;
+// if (process.env.REDISTOGO_URL) {
+//     client = redis.createClient(redisPort, 'redis-13166.c8.us-east-1-4.ec2.cloud.redislabs.com');
+// } else {
+//     client = redis.createClient();
+// }
 client.auth(function(err) {
     if (err) {
         console.log(`Error from redis: ${err}`);
