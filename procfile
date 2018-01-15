@@ -1,2 +1,2 @@
 web: node index.js
-worker: node config.js
+worker: process.env.REDISTOGO_URL=true
