@@ -3,25 +3,39 @@ const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const port = 8000;
+const redisPort = 13166;
 const redis = require('redis');
-
-let client;
-if (process.env.REDISTOGO_URL) {
-    let rtg = require('url').parse(process.env.REDISTOGO_URL);
-    client = redis.createClient(rtg.port, rtg.hostname);
-    client.auth(rtg.auth.split(':')[1]);
-} else {
-    client = redis.createClient();
-}
-
-// let client = redis.createClient();
 const bluebird = require('bluebird');
 bluebird.promisifyAll(redis.RedisClient.prototype);
 bluebird.promisifyAll(redis.Multi.prototype);
 
+// const client = redis.createClient(redisPort, 'redis-13166.c8.us-east-1-4.ec2.cloud.redislabs.com');
+// client.auth(function(err) {
+//     if (err) {
+//         console.log(`Error from redis: ${err}`);
+//         throw err;
+//     }
+// });
+let client;
+if (process.env.REDISTOGO_URL) {
+    client = redis.createClient(redisPort, 'redis-13166.c8.us-east-1-4.ec2.cloud.redislabs.com');
+} else {
+    client = redis.createClient();
+}
+client.auth(function(err) {
+    if (err) {
+        console.log(`Error from redis: ${err}`);
+        throw err;
+    }
+});
 app.use(express.static(__dirname));
 app.get('/', function(req, res) {
     res.sendFile('index.html');
+});
+
+client.on('connect', function() {
+    console.log(process.env.REDISTOGO_URL);
+    console.log('Connected to Redis');
 });
 
 client.on('error', err => {
