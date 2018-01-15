@@ -3,22 +3,20 @@ const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const port = 8000;
-const redisPort = 13166;
 const redis = require('redis');
 const bluebird = require('bluebird');
 bluebird.promisifyAll(redis.RedisClient.prototype);
 bluebird.promisifyAll(redis.Multi.prototype);
 
-let client;
-if (process.argv.length > 2) {
-    client = redis.createClient(redisPort, 'redis-13166.c8.us-east-1-4.ec2.cloud.redislabs.com');
-    console.log('connect remote');
-    console.log(process.argv.length);
-} else {
-    client = redis.createClient();
-    console.log('connect local');
-    console.log(process.argv.length);
-}
+const config = process.env.REDIS === 'remote' ? {
+    uri: 'redis-13166.c8.us-east-1-4.ec2.cloud.redislabs.com',
+    port: '13166'
+} : {
+    uri: 'localhost',
+    port: '6376'
+};
+
+let client = redis.createClient(config.port, config.uri);
 
 client.auth(function(err) {
     if (err) {

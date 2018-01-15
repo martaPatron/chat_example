@@ -1,1 +1,1 @@
-web: node index.js status=remote
+web: REDIS=remote node index.js
