@@ -28,13 +28,13 @@ client.auth(function(err) {
         throw err;
     }
 });
+
 app.use(express.static(__dirname));
 app.get('/', function(req, res) {
     res.sendFile('index.html');
 });
 
 client.on('connect', function() {
-    console.log(process.env.REDISTOGO_URL);
     console.log('Connected to Redis');
 });
 
@@ -147,6 +147,6 @@ io.on('connection', socket => {
     });
 });
 
-http.listen(port, function() {
+http.listen(process.env.PORT || port, function() {
     console.log('listening on *:8000');
 });
