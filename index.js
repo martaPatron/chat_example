@@ -15,6 +15,7 @@ if (process.argv.length > 2) {
 } else {
     client = redis.createClient();
 }
+
 client.auth(function(err) {
     if (err) {
         console.log(`Error from redis: ${err}`);
