@@ -9,14 +9,14 @@ bluebird.promisifyAll(redis.RedisClient.prototype);
 bluebird.promisifyAll(redis.Multi.prototype);
 
 const config = process.env.REDIS === 'remote' ? {
-    uri: 'redis-13166.c8.us-east-1-4.ec2.cloud.redislabs.com',
+    url: 'redis-13166.c8.us-east-1-4.ec2.cloud.redislabs.com',
     port: '13166'
 } : {
-    uri: 'localhost',
+    url: 'localhost',
     port: '6376'
 };
 
-let client = redis.createClient(config.port, config.uri);
+let client = redis.createClient(config.port, config.url);
 
 client.auth(function(err) {
     if (err) {
@@ -32,6 +32,7 @@ app.get('/', function(req, res) {
 
 client.on('connect', function() {
     console.log('Connected to Redis');
+    console.log(config.url);
 });
 
 client.on('error', err => {
